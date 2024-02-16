@@ -8,7 +8,84 @@
 
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-<div id="digital-clock"></div>
+
+<style>
+        /* CSS styles for greetings container */
+        #greetings-container {
+            text-align: center;
+            margin-top: 20px; /* Add margin for spacing */
+        }
+
+        #greeting-message {
+            font-size: 18px;
+            color: #6e3852;
+        }
+
+        #image-container img {
+            max-width: 100%;
+            max-height: 300px;
+        }
+    </style>
+
+    <!-- Add a container for the greetings message and image -->
+    <div id="greetings-container">
+        <!-- Greetings message will be displayed here -->
+        <p id="greeting-message">Welcome to My Page! Have a great day!</p>
+
+        <!-- Image will be displayed here -->
+        <div id="image-container"></div>
+    </div>
+
+    <!-- JavaScript code to fetch and display a random greetings image with message -->
+    <script>
+        function fetchRandomGreetings() {
+            const greetingsContainer = document.getElementById("greetings-container");
+            if (!greetingsContainer) {
+                console.error("Greetings container not found.");
+                return;
+            }
+
+            // Fetch a random image from Unsplash Source API
+            fetch("https://source.unsplash.com/random/400x200")
+                .then(response => {
+                    // Create an image element
+                    const img = document.createElement('img');
+                    img.src = response.url;
+                    img.alt = "Random Greetings Image";
+                    
+                    // Append the image to the image container
+                    const imageContainer = document.getElementById("image-container");
+                    if (imageContainer) {
+                        imageContainer.appendChild(img);
+                    }
+                })
+                .catch(error => console.error("Error fetching greetings image:", error));
+        }
+
+        // Call the fetchRandomGreetings function on page load
+        window.onload = function () {
+            fetchRandomGreetings();
+        };
+    </script>
+
+
+    <style>
+        /* CSS styles for greetings container */
+        #digital-clock {
+            text-align: center;
+            margin-top: 20px; /* Add margin for spacing */
+        }
+
+        #digital-clock {
+            font-size: 18px;
+            color: #6e3852;
+        }
+
+    </style>
+
+
+
+  <div id="digital-clock"></div>
   <script type="text/javascript">
     function displayTime()
     {
@@ -16,6 +93,27 @@
     }
     setInterval(displayTime,500);
   </script>
+
+
+  <style>
+        /* CSS styles for greetings container */
+        #clock {
+            text-align: center;
+            margin-top: 20px; /* Add margin for spacing */
+        }
+
+        #clock {
+            font-size: 18px;
+            color: #6e3852;
+        }
+
+        #clock img {
+            max-width: 100%;
+            max-height: 300px;
+        }
+    </style>
+
+
 
   <div id="clock">
     <canvas id="analog-clock" width="150" height="150" style="background-color:#999"></canvas>
@@ -38,52 +136,37 @@
     </script>
   </div>
 
-  <!-- Email -->
-<div id="email" onclick="toggleEmail()">Show/Hide Email</div>
-<div id="email-address" style="display: none;">vankayan@mail.uc.edu</div>
 
-<script>
-  function toggleEmail() {
-    $('#email-address').toggle();
-}
-</script>
 
-<!-- Additional Functionality -->
-<button id="additional-functionality">Click me for additional functionality</button>
-<div id="additional-info"></div>
-
-<script>
-// Additional Functionality
-  $('#additional-functionality').click(function() {
-    // Display random quote
-    displayRandomQuote();
-    // Change background color (existing functionality)
-    $('body').css('background-color', getRandomColor());
-  });
-
-  // Function to display a random quote
-  function displayRandomQuote() {
-    var quote = new Quote();
-    quote.getQuote().then(function(data) {
-      $('#additional-info').text('Random Quote: ' + data.content);
-    }).catch(function(error) {
-      console.error('Error fetching quote:', error);
-    });
-  }
-
-  // Function to generate random color
-  function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+  <style>
+    /* CSS styles for greetings container */
+    #joke {
+        text-align: center;
+        margin-top: 20px; /* Add margin for spacing */
+        padding: 20px 40px; /* Add padding for spacing on top/bottom and left/right */
     }
-    return color;
-  }
 
-</script>
+    #joke .text-container {
+        background-color: red; /* Background color for text container */
+        display: inline-block; /* Make the container shrink-wrap around the text */
+        padding: 10px; /* Add padding for spacing around the text */
+    }
+
+    #joke p {
+        font-size: 18px;
+        color: #6e3852;
+        margin: 0; /* Remove default margin */
+    }
+
+    #joke img {
+        max-width: 100%;
+        max-height: 300px;
+    }
+</style>
 
 
+
+  
 <div id="joke"></div>
 <script>
   function fetchJoke() {
@@ -101,10 +184,6 @@
   // Fetch a new joke every 1 minute
   setInterval(fetchJoke, 60000);
 </script>
-
-
-
-
 
 
 
@@ -377,7 +456,15 @@
         </div>
         <div class="bio">
           <h1 class="name">ARCHANA VANKAYALAPATI</h1>
-          <p class="profession">707 Martin Luther King Dr West, E807, CINCINNATI OH-45220 | PH-737-274-8159 | vankayan@mail.uc.edu</p>
+          <p class="profession">707 Martin Luther King Dr West, E807, CINCINNATI OH-45220 | PH-737-274-8159 |  <!-- Email -->
+<div id="email" onclick="toggleEmail()">Show/Hide Email</div>
+<div id="email-address" style="display: none;">vankayan@mail.uc.edu</div>
+
+<script>
+  function toggleEmail() {
+    $('#email-address').toggle();
+}
+</script></p>
         </div>
       </div>
       <div class="intro-section">
@@ -409,7 +496,8 @@
             <li>Acquired hands-on experience in Java application development in a dynamic cloud environment, fostering adaptability and problem-solving skills.</li>
           </ul>
         </div>
-      </div>
+
+
       <div class="detail-section">
         <h1 class="detail-title"><span class="title-icon"><i class="fas fa-briefcase"></i></span>Internship</h1>
         <div class="detail-content">
@@ -423,6 +511,7 @@
           </ul>
         </div>
       </div>
+
       <div class="intro-section">
         <h1 class="title">Education</h1>
         <ul>
@@ -472,16 +561,6 @@
 
 
 
-<div class="text-center mt-5">
-  <p>This page is tracked by Flag Counter:</p>
-  
-  <!-- Flag Counter -->
-  <a href="https://info.flagcounter.com/FalW">
-    <img src="https://s11.flagcounter.com/count2/FalW/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0">
-  </a>
-</div>
-
-
 <script>
         // Function to set or update session cookies
         function setCookie(name, value) {
@@ -522,6 +601,34 @@
         // Call the function to display welcome message and track visits on page load
         displayWelcomeMessage();
     </script>
+
+
+
+
+    <style>
+    /* CSS styles for the Flag Counter */
+    .flag-counter {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        background-color: #fff; /* Set background color */
+        padding: 10px 0; /* Add padding for spacing */
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for visual effect */
+        z-index: 1000; /* Set a high z-index to ensure it appears above other content */
+    }
+</style>
+
+<div class="flag-counter">
+    <p>This page is tracked by Flag Counter:</p>
+  
+    <!-- Flag Counter -->
+    <a href="https://info.flagcounter.com/FalW">
+        <img src="https://s11.flagcounter.com/count2/FalW/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0">
+    </a>
+</div>
+
 
 </body>
 </html>
