@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Resume</title>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<div id="digital-clock"></div>
+  <script type="text/javascript">
+    function displayTime()
+    {
+      document.getElementById('digital-clock').innerHTML= "Current Time: " + new Date();
+    }
+    setInterval(displayTime,500);
+  </script>
+
+  <div id="clock">
+    <canvas id="analog-clock" width="150" height="150" style="background-color:#999"></canvas>
+    <script src="https://waph-uc.github.io/clock.js"></script>
+    <script>
+    var canvas = document.getElementById("analog-clock");
+    var ctx = canvas.getContext("2d");
+    var radius = canvas.height / 2;
+    ctx.translate(radius, radius);
+    radius = radius * 0.90
+    setInterval(drawClock, 1000); 
+
+
+    function drawClock()
+    {
+      drawFace(ctx, radius);
+      drawNumbers(ctx, radius);
+      drawTime(ctx, radius);  
+    }
+    </script>
+  </div>
+
+  <!-- Email -->
+<div id="email" onclick="toggleEmail()">Show/Hide Email</div>
+<div id="email-address" style="display: none;">vankayan@mail.uc.edu</div>
+
+<script>
+  function toggleEmail() {
+    $('#email-address').toggle();
+}
+</script>
+
+<!-- Additional Functionality -->
+<button id="additional-functionality">Click me for additional functionality</button>
+<div id="additional-info"></div>
+
+<script>
+// Additional Functionality
+  $('#additional-functionality').click(function() {
+    // Display random quote
+    displayRandomQuote();
+    // Change background color (existing functionality)
+    $('body').css('background-color', getRandomColor());
+  });
+
+  // Function to display a random quote
+  function displayRandomQuote() {
+    var quote = new Quote();
+    quote.getQuote().then(function(data) {
+      $('#additional-info').text('Random Quote: ' + data.content);
+    }).catch(function(error) {
+      console.error('Error fetching quote:', error);
+    });
+  }
+
+  // Function to generate random color
+  function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+</script>
+
+
+<div id="joke"></div>
+<script>
+  function fetchJoke() {
+    fetch('https://v2.jokeapi.dev/joke/Any')
+    .then(response => response.json())
+    .then(data => {
+    // Check if joke type is single or twopart
+      let jokeText = data.type === 'single' ? data.joke : `${data.setup}<br>${data.delivery}`;
+      document.getElementById('joke').innerHTML = jokeText;
+    })
+    .catch(error => console.error('Error fetching joke:', error));
+  }
+  // Fetch joke initially
+  fetchJoke();
+  // Fetch a new joke every 1 minute
+  setInterval(fetchJoke, 60000);
+</script>
+
+
+
+
+
+
+
+<style>
+  :root {
+    --color-gray-light-1: #f8f8f8;
+    --color-gray-light-2: #e9e9e9;
+    --color-gray-light-3: #dedede;
+    --color-gray-dark-1: #545454;
+    --color-gray-dark-2: #737373;
+    --color-gray-dark-3: #9a9a9a;
+    --color-blue-dark-1: #00387f;
+    --color-tiffany: #00a6a6;
+    --profile-theme: #4682bf;
+    --timeline-circle-theme: #14253e;
+
+    --pgbar-length: 100%;
+
+    --MATH-PI: 3.1415px;
+    --percent: 100;
+  }
+
+  html {
+    font-size: 100%;
+    font-family: 'PT Sans', sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 3rem 1rem;
+    min-height: 100vh;
+    background-color: var(--color-gray-light-3);
+  }
+
+  .wrapper {
+    margin: 0 auto;
+    max-width: 70rem;
+    background-color: var(--color-gray-light-2);
+    display: flex;
+    box-shadow: 0px 0px 15px 4px #b3b3b3;
+  }
+
+  .intro {
+    flex: 0 0 250px;
+    background-color: var(--color-gray-light-1);
+    box-shadow: 5px 0px 15px 0px #b3b3b3;
+    z-index: 5;
+  }
+  .profile {
+    position: relative;
+    background-color: var(--profile-theme);
+    padding: 2rem 1rem;
+    margin-bottom: 50px;
+    text-align: center;
+    user-select: none;
+  }
+  .profile::after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    width: 100%;
+    height: 30px;
+    background-color: var(--profile-theme);
+    transform: skewY(-5deg);
+  }
+  .photo img {
+    width: 80%;
+    border-radius: 50%;
+  }
+  .bio .name {
+    font-size: 1.5rem;
+    text-align: center;
+    color: var(--color-gray-light-1);
+    margin: 0;
+    margin-top: 1rem;
+  }
+  .bio .profession {
+    font-size: 1rem;
+    text-align: center;
+    color: var(--color-gray-light-1);
+    margin: 0;
+  }
+
+  .intro-section {
+    padding: 0 1rem;
+    color: var(--color-gray-dark-1);
+  }
+  .intro-section .title {
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .about .paragraph {
+    text-align: justify;
+  }
+  .info-section {
+    margin: 1rem 0;
+  }
+  .info-section span {
+    position: relative;
+    transition: all 0.3s;
+  }
+  .info-section i {
+    color: var(--profile-theme);
+    width: 20px;
+    height: 20px;
+  }
+
+  .link a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .link span::after {
+    position: absolute;
+    content: '';
+    left: 50%;
+    bottom: -3px;
+    width: 0;
+    height: 2px;
+    background-color: var(--profile-theme);
+    transition: width 0.3s;
+    transition-timing-function: cubic-bezier(.92,.57,.33,1.02);
+    transform: translate(-50%, 0);
+  }
+
+  .link span:hover {
+    color: var(--profile-theme);
+  }
+  .link span:hover::after {
+    width: 100%;
+  }
+
+  .detail {
+    flex: 1 0 0;
+    background-color: white;
+    padding: 2rem;
+  }
+  .detail:hover > .detail-section:not(:hover) {
+    opacity: 0.3;
+  }
+  .detail-section {
+    transition: all 0.3s;
+  }
+  .detail-section:not(:last-of-type) {
+    padding-bottom: 1rem;
+  }
+  .detail-title {
+    display: flex;
+    align-items: center;
+  }
+  .detail-section > .detail-content {
+    padding: 1.5rem;
+    padding-left: 2rem;
+    user-select: none;
+  }
+  .detail-section.edu > .detail-content {
+    padding-left: calc(1.5rem + 10px);
+  }
+  .title-icon + span {
+    font-size: 1.5rem;
+    transition: all 0.3s;
+  }
+  .title-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    margin-right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: var(--profile-theme);
+    border-radius: 50%;
+    transition: all 0.3s;
+  }
+  .title-icon i {
+    color: white;
+    line-height: 1rem;
+    font-size: 1rem;
+    text-align: center;
+  }
+  .detail-section:hover .title-icon {
+    transform: scale(1.5);
+    margin-right: 1.5rem;
+  }
+  .detail-section:hover .title-icon + span {
+    letter-spacing: 1.5px;
+  }
+
+  .timeline-block {
+    position: relative;
+    padding-left: 30px;
+  }
+  .timeline-block:not(:last-of-type) {
+    margin-bottom: 1rem;  
+  }
+  .timeline-block h1 {
+    font-size: 1rem;
+    margin: 5px 0;
+    transition: all 0.3s;
+  }
+  .timeline-block p {
+    font-size: 0.8rem;
+    margin: 5px 0;
+  }
+  .timeline-block time {
+    font-size: 0.8rem;
+    color: var(--color-gray-dark-2);
+  }
+  .timeline-block::before {
+    position: absolute;
+    content: '';
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border: 3px solid var(--timeline-circle-theme);
+    border-radius: 50%;
+    left: -10px;
+    top: -5px;
+  }
+  .timeline-block::after {
+    position: absolute;
+    content: '';
+    width: 3px;
+    height: 100%;
+    background-color: var(--timeline-circle-theme);
+    left: -1px;
+    top: 13px;
+  }
+  .timeline-block:hover h1 {
+    color: var(--color-tiffany);
+  }
+  .timeline-block:hover::before {
+    animation: circle 1.2s infinite;
+  }
+
+  .pg-list, .tool-list, .favor-list {
+    padding: 0;
+    list-style: none;
+  }
+  .pg-list > li {    
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+  }
+  .sb-skeleton {
+    position: relative;
+    flex: 1 0 auto;
+    height: 2px;
+    background-color: var(--color-gray-dark-3);
+  }
+  .pg-list > li > span {
+    flex: 0 0 100px;
+  }
+
+</style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="intro">
+      <div class="profile">
+        <div class="photo">
+          <img src="images/headshot.jpg" alt="Profile Picture">
+        </div>
+        <div class="bio">
+          <h1 class="name">ARCHANA VANKAYALAPATI</h1>
+          <p class="profession">707 Martin Luther King Dr West, E807, CINCINNATI OH-45220 | PH-737-274-8159 | vankayan@mail.uc.edu</p>
+        </div>
+      </div>
+      <div class="intro-section">
+        <h1 class="title">Skills</h1>
+        <ul>
+          <li>Programming languages: C, JAVA, HTML, CSS, React Js, Bootstrap, SQL, Web Development</li>
+          <li>Cloud Environments: AWS, AZURE</li>
+          <li>Frameworks: Springboot</li>
+          <li>Database: MySQL, Oracle 19c</li>
+          <li>Operating Systems: Linux, Windows, Mac</li>
+          <li>Technical Support: Proficient in providing computer hardware, software, and technical support.</li>
+          <li>Software Installation & Troubleshooting: Skilled in installing and troubleshooting office software systems, including new applications and upgrades.</li>
+          <li>Proficient in utilizing Sublime Text (Subl) as a primary code editor for writing clean and efficient code.</li>
+          <li>Skilled in version control systems such as Git for managing code repositories, branching, merging, and collaboration with team members.</li>
+          <li>Skilled in utilizing design and prototyping tools such as Figma for creating high-fidelity UI/UX designs and interactive prototypes.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="detail">
+      <div class="detail-section">
+        <h1 class="detail-title"><span class="title-icon"><i class="fas fa-briefcase"></i></span>Experience</h1>
+        <div class="detail-content">
+          <h1>HCL PRIVATE LIMITED</h1>
+          <p>JUNE 2022 - 2023</p>
+          <ul>
+            <li>Developed and maintained cloud-based applications at HCL, leveraging Java, MySQL, and AWS Cloud technologies.</li>
+            <li>Enhanced skills in optimizing MySQL database performance for improved application responsiveness.</li>
+            <li>Gained expertise in deploying and managing cloud infrastructure on AWS, ensuring scalability and resource efficiency. Successfully integrated various AWS services to create robust, end-to-end solutions.</li>
+            <li>Acquired hands-on experience in Java application development in a dynamic cloud environment, fostering adaptability and problem-solving skills.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="detail-section">
+        <h1 class="detail-title"><span class="title-icon"><i class="fas fa-briefcase"></i></span>Internship</h1>
+        <div class="detail-content">
+          <h1>WIPRO</h1>
+          <p>APRIL 2022 – JUNE 2022</p>
+          <ul>
+            <li>Shop for Home using AWS Cloud</li>
+            <li>Developed a web application for a popular store, Shop for Home, for online shopping of home decor items. Implemented AWS Cloud platform for the application.</li>
+            <li>In this I have used both frontend and backend. In frontend I have implemented using HTML, CSS, REACT. In backend I have used Java and implemented using Spring Boot application. Used MYSQL database to store the information.</li>
+            <li>Designed the application for 2 users: User and Admin.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="intro-section">
+        <h1 class="title">Education</h1>
+        <ul>
+          <li>
+            <h1>Ms in Information Technology</h1>
+            <p>Expected Graduation 2024</p>
+            <p>University of Cincinnati, OH</p>
+            <ul>
+              <li>Advanced Data Analytics: Proficiency in data mining, statistical analysis, and machine learning.</li>
+              <li>Cybersecurity and Network Defense: Skills in network security, ethical hacking, and threat detection.</li>
+              <li>Cloud Computing: Expertise in deploying and managing cloud infrastructure (AWS, Azure).</li>
+              <li>Database Management: Competence in designing, implementing, and optimizing databases (SQL and NoSQL).</li>
+              <li>IT Project Management: Knowledge of project planning and Agile methodologies.</li>
+            </ul>
+          </li>
+          <li>
+            <h1>B.Tech. in Electronics and Communication Engineering</h1>
+            <p>Graduation: 2022</p>
+            <p>DVR & DR. HS MIC COLLEGE OF TECHNOLOGY, Kanchikecherla</p>
+            <p>GPA: 8.69</p>
+            <ul>
+              <li>Possess a strong foundation in Electrical Engineering, with expertise in circuit design, electronics, and power systems, acquired through relevant coursework and hands-on projects.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="intro-section">
+        <h1 class="title">Certifications</h1>
+        <ul>
+          <li>Certified in JAVA by Kodnest Technology</li>
+          <li>Attained Java certification from Kodnest Technology, acquiring comprehensive knowledge in core Java concepts, advanced programming features, and hands-on experience in building scalable applications.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Page trackers -->
+  <div class="text-center mt-5">
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+<div class="text-center mt-5">
+  <p>This page is tracked by Flag Counter:</p>
+  
+  <!-- Flag Counter -->
+  <a href="https://info.flagcounter.com/FalW">
+    <img src="https://s11.flagcounter.com/count2/FalW/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0">
+  </a>
+</div>
+
+
+<script>
+        // Function to set or update session cookies
+        function setCookie(name, value) {
+            document.cookie = name + "=" + value + ";path=/";
+        }
+
+        // Function to get the value of a session cookie
+        function getCookie(name) {
+            const cookies = document.cookie.split(';');
+            for (const cookie of cookies) {
+                const [cookieName, cookieValue] = cookie.trim().split('=');
+                if (cookieName === name) {
+                    return cookieValue;
+                }
+            }
+            return null;
+        }
+
+        // Function to display welcome message and track visits
+        function displayWelcomeMessage() {
+            const lastLoginTimestamp = getCookie('lastLoginTimestamp');
+            let visitCount = parseInt(getCookie('visitCount')) || 0;
+
+            if (!lastLoginTimestamp) {
+                // First-time visit
+                alert("Welcome to my page!");
+            } else {
+                // Returning visitor
+                alert("Welcome back! Last login: " + lastLoginTimestamp + "\n You have visited this page: " + visitCount + " times.");
+            }
+
+            // Update visit count and last login timestamp
+            visitCount++;
+            setCookie('visitCount', visitCount);
+            setCookie('lastLoginTimestamp', new Date().toLocaleString());
+        }
+
+        // Call the function to display welcome message and track visits on page load
+        displayWelcomeMessage();
+    </script>
+
+</body>
+</html>
