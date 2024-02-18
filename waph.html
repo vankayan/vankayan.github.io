@@ -1,29 +1,183 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>Front-end Web Development Lab</title>
+    <meta charset="utf-8">
+    <title>WAPH-Archana Vankayalapati</title>
+    <link rel="stylesheet" type="text/css" href="https://waph-uc.github.io/style1.css">
+    <style>
+        .button{
+            background-color: #4CAF50;
+            border:none;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .round {border-radius: 8px;}
+        #response {background-color: #ff9800;}
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
+    <div class="container wrapper">
+        <div id="top">
+            <h1>Web Application Programming and Hacking</h1>
+            <h2>Front-end Web Development Lab</h2>
+            <h3>Instructor: Dr. Phu Phung</h3>
+            <a href="index.html" style="font-size: 130%;">Home</a>
 
-<div class="container-wrapper">
-    <div id="top">
-        <h1>Introduction to Web Application Programming and Hacking</h1>
-        <h2>Front-end Web Development Lab</h2>
-        <h3>Instructor: Dr. Phu Phung</h3>
-    </div>
-    <div class="wrapper">
-        <div id="menubar">
-            <h3>Student Name: Archana Vankayalapati</h3>
         </div>
-        <div id="main">
-            <p>A simple HTML Page</p>
-            <p>Using the <a href="https://www.w3schools.com/html//">W3 Schools Template</a>
+        <div class="wrapper">
+            <div id="menubar">
+                <h3>Student: Archana Vankayalapati</h3>
+                <div id="email" onclick="toggleEmail()">Show/Hide Email</div>
+                <div id="email-address" style="display: none;">vankayan@mail.uc.edu</div>
+                <script>
+                    function toggleEmail() {
+                        $('#email-address').toggle();
+                    }
+                </script>
+                <img src="images/headshot.jpg" alt="My headshot" width="50">
+                <div id="digit-clock"></div>
+                <script>
+                    function displayTime(){
+                        document.getElementById('digit-clock').innerHTML="Current time: "+new Date();
+                    }
+                        setInterval(displayTime, 500);
+                </script>
+                <canvas id="analog-clock" width="150" height="150" style="background-color: #999"></canvas>
+                <script src="https://waph-uc.github.io/clock.js"></script>
+                <script>
+                    var canvas = document.getElementById("analog-clock");
+                    var ctx=canvas.getContext("2d");
+                    var radius=canvas.height/2;
+                    ctx.translate(radius,radius);
+                    radius=radius*0.90;
+                    setInterval(drawClock,1000);
+
+                    function drawClock(){
+                        drawFace(ctx, radius);
+                        drawNumbers(ctx, radius);
+                        drawTime(ctx, radius);
+                    }
+                </script>
+            </div>
+            <div id="main">
+                <p>A simple HTML page </p>
+                Using the <a href="https://www.w3schools.com/html"> W3Schools template</a>
+                <hr>
+                
+                <div>
+                    
+                    <script>
+                        // Define AngularJS module
+                        var app = angular.module('myApp', []);
+                        
+                        // Define AngularJS controller
+                        app.controller('myCtrl', function($scope) {
+                            // Define variables and functions for the controller
+                            $scope.message = 'Hello from AngularJS!';
+                        });
+                    </script>
+                    <div class="wrapper">
+                            <div id="menubar">
+                                
+                                <!-- Other menu items -->
+                                <div id="response"></div> <!-- Display area for the joke -->
+                                <script>
+                                    // Function to fetch a joke from the JokeAPI
+                                    function fetchJoke() {
+                                        $.get("https://v2.jokeapi.dev/joke/Programming?type=single",
+                                            function(result){
+                                                console.log("From jokeAPI: " + JSON.stringify(result));
+                                                $("#response").html("A programming joke of the minute: "+result.joke);
+                                            });
+                                    }
+                
+                                    // Fetch a joke initially
+                                    fetchJoke();
+                
+                                    // Fetch a new joke every minute
+                                    setInterval(fetchJoke, 60000); // 60000 milliseconds = 1 minute
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div>
+                    <b>Experiments with JavaScript code</b><br>
+                    <i>Inlined JavaScript</i>
+                    <div id="date" onclick="document.getElementById('date').innerHTML=Date()">Click here to show Date()</div>
+                </div>
+                <div>
+                    <h2>Current Weather</h2>
+                    <div id="weather-info">
+                        <!-- Weather data will be displayed here -->
+                      </div>
+                    <div>
+                        <script>
+  
+                            const apiKey = 'cb388c42c8154dc1a25190f00185f145';
+                            const apiUrl = `https://api.weatherbit.io/v2.0/current?key=${apiKey}&city=cincinnati`;
+                          
+                            // Fetch weather data from Weatherbit.io API
+                            fetch(apiUrl)
+                              .then(response => response.json())
+                              .then(data => {
+                                // Extract relevant weather information
+                                const weather = data.data[0];
+                                const temperature = weather.temp;
+                                const description = weather.weather.description;
+                          
+                                // Display weather information on the page
+                                document.getElementById('weather-info').innerHTML = `
+                                  <p>Temperature: ${temperature}°C</p>
+                                  <p>Description: ${description}</p>
+                                `;
+                              })
+                              .catch(error => {
+                                console.error('Error fetching weather data:', error);
+                              });
+                          </script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Course Description</h2>
+            <p>This course offers an in-depth exploration of fundamental web application development, covering both front-end technologies like HTML5, JavaScript, and CSS, as well as back-end tools such as PHP and MySQL. Through hands-on exercises, students will delve into web application vulnerabilities and attacks, gaining practical experience in identifying and mitigating security risks. Emphasis is placed on introducing secure programming principles and best practices to safeguard against potential vulnerabilities and attacks in web applications.</p>
+            <h2>Course Outcomes</h2>
+            <h3>Lab-1</h3>
+            <ul>
+                <li>Explored packet analysis techniques using Wireshark.</li>
+                <li>Introduced to telnet and curl utilities.</li>
+                <li>Examined the process of packet transmission and response generation in HTTP requests.</li>
+                <li>Experimented with C, HTML, PHP, and echo commands to grasp the functionality of packets and the workings of HTTP streams.</li>
+            </ul>
+            <h3>Lab-2</h3>
+            <ul>
+                <li>Acquired skills in integrating HTML with JavaScript.</li>
+                <li>Implemented CSS styling to enhance the appearance of HTML pages.</li>
+                <li>Utilized Ajax to send both GET and POST requests.</li>
+                <li>Programmed to listen for HTTP requests and dynamically display the content within designated elements.</li>
+            </ul>
+            <h3>Hackathon-1</h3>
+            <ul>
+                <li>Explored the concept of cross-site scripting (XSS) attacks during the hackathon.</li>
+                <li>Successfully completed levels 0 to 6, involving the analysis of source code.</li>
+                <li>Received helpful hints that facilitated progress through the levels.</li>
+                <li>Gained insight into the execution of XSS attacks on websites.</li>
+                <li>Acquired strategies for mitigating and preventing XSS attacks.</li>  
+                <li>The hackathon consisted of two primary tasks, each comprising multiple sub-tasks, with grades allocated accordingly.</li>         
+            </ul>
         </div>
     </div>
-</div>
-
-</html>
-
 </body>
 </html>
