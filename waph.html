@@ -70,7 +70,45 @@
             <div id="main">
                 <p>A simple HTML page </p>
                 Using the <a href="https://www.w3schools.com/html"> W3Schools template</a>
+                <hr>
                 
+                <div>
+                    
+                    <script>
+                        // Define AngularJS module
+                        var app = angular.module('myApp', []);
+                        
+                        // Define AngularJS controller
+                        app.controller('myCtrl', function($scope) {
+                            // Define variables and functions for the controller
+                            $scope.message = 'Hello from AngularJS!';
+                        });
+                    </script>
+                    <div class="wrapper">
+                            <div id="menubar">
+                                
+                                <!-- Other menu items -->
+                                <div id="response"></div> <!-- Display area for the joke -->
+                                <script>
+                                    // Function to fetch a joke from the JokeAPI
+                                    function fetchJoke() {
+                                        $.get("https://v2.jokeapi.dev/joke/Programming?type=single",
+                                            function(result){
+                                                console.log("From jokeAPI: " + JSON.stringify(result));
+                                                $("#response").html("A programming joke of the minute: "+result.joke);
+                                            });
+                                    }
+                
+                                    // Fetch a joke initially
+                                    fetchJoke();
+                
+                                    // Fetch a new joke every minute
+                                    setInterval(fetchJoke, 60000); // 60000 milliseconds = 1 minute
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <hr>
                 <div>
                     <b>Experiments with JavaScript code</b><br>
