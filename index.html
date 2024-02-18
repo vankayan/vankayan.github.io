@@ -1,13 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
+
     <title>Archana Vankayalapati - Profile</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        /* CSS styles for greetings container */
+        #greetings-container {
+            text-align: center;
+            margin-top: 100px; /* Add margin for spacing */
+        }
 
-<style>
+        #greeting-message {
+            font-size: 20px;
+            color: #6e3852;
+        }
+
+        #image-container img {
+            max-width: 100%;
+            max-height: 300px;
+        }
+    </style>
+
+    <!-- Add a container for the greetings message and image -->
+    <div id="greetings-container">
+        <!-- Greetings message will be displayed here -->
+        <p id="greeting-message">Welcome to My Page! Have a great day!</p>
+
+        <!-- Image will be displayed here -->
+        <div id="image-container"></div>
+    </div>
+
+    <!-- JavaScript code to fetch and display a random greetings image with message -->
+    <script>
+        function fetchRandomGreetings() {
+            const greetingsContainer = document.getElementById("greetings-container");
+            if (!greetingsContainer) {
+                console.error("Greetings container not found.");
+                return;
+            }
+
+            // Fetch a random image from Unsplash Source API
+            fetch("https://source.unsplash.com/random/400x200")
+                .then(response => {
+                    // Create an image element
+                    const img = document.createElement('img');
+                    img.src = response.url;
+                    img.alt = "Random Greetings Image";
+                    
+                    // Append the image to the image container
+                    const imageContainer = document.getElementById("image-container");
+                    if (imageContainer) {
+                        imageContainer.appendChild(img);
+                    }
+                })
+                .catch(error => console.error("Error fetching greetings image:", error));
+        }
+
+        window.onload = function () {
+            fetchRandomGreetings();
+        };
+    </script>
+
+
+    <style>
         body {
           font: 400 15px Lato, sans-serif;
           line-height: 1.8;
@@ -195,10 +257,10 @@
           }
         }
         </style>
-</head> 
-
-
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60"> 
+</head>
+      
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+ 
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -223,6 +285,7 @@
     </div>
   </div>
 </nav>
+
 <div class="jumbotron text-center" >
   <table class="center">
     <tr>
@@ -389,8 +452,95 @@
   </div>
 </div>
 
-<footer>
-  <style>
+<footer class="container-fluid text-center">
+  <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a>
+  <p>Bootstrap Theme Made By <a href="https://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a></p>
+</footer>
+
+<script>
+$(document).ready(function(){
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 900, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+  
+  $(window).scroll(function() {
+    $(".slideanim").each(function(){
+      var pos = $(this).offset().top;
+
+      var winTop = $(window).scrollTop();
+      if (pos < winTop + 600) {
+        $(this).addClass("slide");
+      }
+    });
+  });
+})
+</script>
+
+<script>
+  // Function to set a cookie with the current date/time
+  function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
+  // Function to get the value of a cookie by name
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i];
+      while (cookie.charAt(0) == ' ') {
+        cookie = cookie.substring(1, cookie.length);
+      }
+      if (cookie.indexOf(nameEQ) == 0) {
+        return cookie.substring(nameEQ.length, cookie.length);
+      }
+    }
+    return null;
+  }
+
+  // Function to display a welcome message based on the presence of the "lastVisit" cookie
+  function displayWelcomeMessage() {
+    var lastVisit = getCookie("lastVisit");
+    if (lastVisit) {
+      alert("Welcome back! Your last visit was " + lastVisit);
+    } else {
+      setCookie("lastVisit", new Date(), 365); // Set a cookie for one year
+      alert("Welcome to my homepage!");
+    }
+  }
+
+  // Call the function to display the welcome message
+  displayWelcomeMessage();
+</script>
+
+
+<style>
     /* CSS styles for the Flag Counter */
     .flag-counter {
         position: fixed;
@@ -413,7 +563,7 @@
         <img src="https://s11.flagcounter.com/count2/FalW/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0">
     </a>
 </div>
-</footer>
+
+
 </body>
 </html>
-
