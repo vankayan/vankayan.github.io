@@ -1,11 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
+
     <title>Archana Vankayalapati - Profile</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>      
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        /* CSS styles for greetings container */
+        #greetings-container {
+            text-align: center;
+            margin-top: 100px; /* Add margin for spacing */
+        }
+
+        #greeting-message {
+            font-size: 20px;
+            color: #6e3852;
+        }
+
+        #image-container img {
+            max-width: 100%;
+            max-height: 300px;
+        }
+    </style>
+
+    <!-- Add a container for the greetings message and image -->
+    <div id="greetings-container">
+        <!-- Greetings message will be displayed here -->
+        <p id="greeting-message">Welcome to My Page! Have a great day!</p>
+
+        <!-- Image will be displayed here -->
+        <div id="image-container"></div>
+    </div>
+
+    <!-- JavaScript code to fetch and display a random greetings image with message -->
+    <script>
+        function fetchRandomGreetings() {
+            const greetingsContainer = document.getElementById("greetings-container");
+            if (!greetingsContainer) {
+                console.error("Greetings container not found.");
+                return;
+            }
+
+            // Fetch a random image from Unsplash Source API
+            fetch("https://source.unsplash.com/random/400x200")
+                .then(response => {
+                    // Create an image element
+                    const img = document.createElement('img');
+                    img.src = response.url;
+                    img.alt = "Random Greetings Image";
+                    
+                    // Append the image to the image container
+                    const imageContainer = document.getElementById("image-container");
+                    if (imageContainer) {
+                        imageContainer.appendChild(img);
+                    }
+                })
+                .catch(error => console.error("Error fetching greetings image:", error));
+        }
+
+        window.onload = function () {
+            fetchRandomGreetings();
+        };
+    </script>
+
+
+    <style>
+        body {
+          font: 400 15px Lato, sans-serif;
+          line-height: 1.8;
+          color: #0b0a0e;
+        }
+        h2 {
+          font-size: 24px;
+          text-transform: uppercase;
+          color: #303030;
+          font-weight: 600;
+          margin-bottom: 30px;
+        }
+        h4 {
+          font-size: 19px;
+          line-height: 1.375em;
+          color: #303030;
+          font-weight: 400;
+          margin-bottom: 30px;
+        }  
+        .jumbotron {
+          background-color: yellowgreen;
+          color: #fff;
+          padding: 100px 25px;
+          font-family: Montserrat, sans-serif;
+        }
+        .container-fluid {
+          padding: 60px 50px;
+        }
+        .bg-grey {
+          background-color: #f6f6f6;
+        }
+        .logo-small {
+          color: #8458B3;
+          font-size: 50px;
+        }
+        .logo {
+          color: #8458B3;
+          font-size: 200px;
+        }
+        .thumbnail {
+          padding: 0 0 15px 0;
+          border: none;
+          border-radius: 0;
+        }
+        .thumbnail img {
+          width: 100%;
+          height: 100%;
+          margin-bottom: 10px;
+        }
+        .carousel-control.right, .carousel-control.left {
+          background-image: none;
+          color: #8458B3;
+        }
+        .carousel-indicators li {
+          border-color: #8458B3;
+        }
+        .carousel-indicators li.active {
+          background-color: #8458B3;
+        }
+        .item h4 {
+          font-size: 19px;
+          line-height: 1.375em;
+          font-weight: 400;
+          font-style: italic;
+          margin: 70px 0;
+        }
+        .item span {
+          font-style: normal;
+        }
+        .panel {
+          border: 1px solid #8458B3; 
+          border-radius:0 !important;
+          transition: box-shadow 0.5s;
+        }
+        .panel:hover {
+          box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+        }
+        .panel-footer .btn:hover {
+          border: 1px solid #8458B3;
+          background-color: #fff !important;
+          color: #8458B3;
+        }
+        .panel-heading {
+          color: #fff !important;
+          background-color: #8458B3 !important;
+          padding: 25px;
+          border-bottom: 1px solid transparent;
+          border-top-left-radius: 0px;
+          border-top-right-radius: 0px;
+          border-bottom-left-radius: 0px;
+          border-bottom-right-radius: 0px;
+        }
+        .panel-footer {
+          background-color: white !important;
+        }
+        .panel-footer h3 {
+          font-size: 32px;
+        }
+        .panel-footer h4 {
+          color: #aaa;
+          font-size: 14px;
+        }
+        .panel-footer .btn {
+          margin: 15px 0;
+          background-color: #8458B3;
+          color: #fff;
+        }
+        img {
+        border-radius: 50%;
+        }
+        .center{
+          margin-left:10%;
+          margin-right:15%;
+          margin-top: 5%;
+          width: 80%;
+        }
+        .navbar {
+          margin-bottom: 0;
+          background-color: yellowgreen;
+          z-index: 9999;
+          border: 0;
+          font-size: 12px !important;
+          line-height: 1.42857143 !important;
+          letter-spacing: 4px;
+          border-radius: 0;
+          font-family: Montserrat, sans-serif;
+        }
+        .navbar li a, .navbar .navbar-brand {
+          color: #fff !important;
+        }
+        .navbar-nav li a:hover, .navbar-nav li.active a {
+          color: #8458B3 !important;
+          background-color: #fff !important;
+        }
+        .navbar-default .navbar-toggle {
+          border-color: transparent;
+          color: #fff !important;
+        }
+        footer .glyphicon {
+          font-size: 20px;
+          margin-bottom: 20px;
+          color: #8458B3;
+        }
+        .slideanim {visibility:hidden;}
+        .slide {
+          animation-name: slide;
+          -webkit-animation-name: slide;
+          animation-duration: 1s;
+          -webkit-animation-duration: 1s;
+          visibility: visible;
+        }
+        @keyframes slide {
+          0% {
+            opacity: 0;
+            transform: translateY(70%);
+          } 
+          100% {
+            opacity: 1;
+            transform: translateY(0%);
+          }
+        }
+        @-webkit-keyframes slide {
+          0% {
+            opacity: 0;
+            -webkit-transform: translateY(70%);
+          } 
+          100% {
+            opacity: 1;
+            -webkit-transform: translateY(0%);
+          }
+        }
+        @media screen and (max-width: 768px) {
+          .col-sm-4 {
+            text-align: center;
+            margin: 25px 0;
+          }
+          .btn-lg {
+            width: 100%;
+            margin-bottom: 35px;
+          }
+        }
+        @media screen and (max-width: 480px) {
+          .logo {
+            font-size: 150px;
+          }
+        }
+        </style>
+</head>
+      
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+ 
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -30,6 +285,7 @@
     </div>
   </div>
 </nav>
+
 <div class="jumbotron text-center" >
   <table class="center">
     <tr>
@@ -195,5 +451,119 @@
     </div>
   </div>
 </div>
+
+<footer class="container-fluid text-center">
+  <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a>
+  <p>Bootstrap Theme Made By <a href="https://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a></p>
+</footer>
+
+<script>
+$(document).ready(function(){
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 900, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+  
+  $(window).scroll(function() {
+    $(".slideanim").each(function(){
+      var pos = $(this).offset().top;
+
+      var winTop = $(window).scrollTop();
+      if (pos < winTop + 600) {
+        $(this).addClass("slide");
+      }
+    });
+  });
+})
+</script>
+
+<script>
+  // Function to set a cookie with the current date/time
+  function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
+  // Function to get the value of a cookie by name
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i];
+      while (cookie.charAt(0) == ' ') {
+        cookie = cookie.substring(1, cookie.length);
+      }
+      if (cookie.indexOf(nameEQ) == 0) {
+        return cookie.substring(nameEQ.length, cookie.length);
+      }
+    }
+    return null;
+  }
+
+  // Function to display a welcome message based on the presence of the "lastVisit" cookie
+  function displayWelcomeMessage() {
+    var lastVisit = getCookie("lastVisit");
+    if (lastVisit) {
+      alert("Welcome back! Your last visit was " + lastVisit);
+    } else {
+      setCookie("lastVisit", new Date(), 365); // Set a cookie for one year
+      alert("Welcome to my homepage!");
+    }
+  }
+
+  // Call the function to display the welcome message
+  displayWelcomeMessage();
+</script>
+
+
+<style>
+    /* CSS styles for the Flag Counter */
+    .flag-counter {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        background-color: #fff; /* Set background color */
+        padding: 10px 0; /* Add padding for spacing */
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for visual effect */
+        z-index: 1000; /* Set a high z-index to ensure it appears above other content */
+    }
+</style>
+
+<div class="flag-counter">
+    <p>This page is tracked by Flag Counter:</p>
+  
+    <!-- Flag Counter -->
+    <a href="https://info.flagcounter.com/FalW">
+        <img src="https://s11.flagcounter.com/count2/FalW/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0">
+    </a>
+</div>
+
+
 </body>
 </html>
